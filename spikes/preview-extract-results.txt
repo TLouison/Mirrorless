@@ -1,0 +1,115 @@
+Median of 5 runs per measurement; files are in the page cache (warm).
+
+## D850__Nikon-D850-14bit-lossless-compressed.NEF  (55.2 MB)
+libraw   locate       0.6 ms  | 4 previews:
+             160x120       0.06 MB  @203264     jpeg=false
+            8256x5504      5.32 MB  @1357312    jpeg=true  read     2.8 ms soi=true  zune-full   347.8 ms  | scaled 4128x2752   278.9 ms  | scaled 1032x688   161.2 ms
+            1620x1080      1.10 MB  @261632     jpeg=true  read     0.2 ms soi=true  zune-full    23.4 ms
+             640x424       0.15 MB  @54768      jpeg=true  read     0.0 ms soi=true  zune-full     3.3 ms
+rawler   metadata     7.6 ms  | Nikon D850 | Some("2017:10:15 17:34:59").Some("09") | serial None | img# None | lens Some("35mm F1.4 DG HSM")
+rawler   thumbnail  -- none
+rawler   preview     313.9 ms  | 8256x5504 (decoded by rawler)
+rawler   full       -- none
+libraw   extract      2.1 ms  | 8256x5504 jpeg=true 5.32 MB, 4 thumbs in file | Nikon D850 | ts 1508088899 | serial "6003734" | lens "" | ISO 64
+zune     decode     317.3 ms  | 8256x5504 full decode of LibRaw's JPEG
+
+## EOS_R10__IMG_4276.CR3  (31.0 MB)
+libraw   locate       0.9 ms  | 3 previews:
+             160x120       0.01 MB  @17264      jpeg=true  read     0.0 ms soi=true  zune-full     0.3 ms
+            1620x1080      0.19 MB  @96296      jpeg=true  read     0.0 ms soi=true  zune-full     9.1 ms
+               0x0         1.62 MB  @285184     jpeg=true  read     0.3 ms soi=true  zune-full   146.8 ms
+rawler   metadata     3.5 ms  | Canon EOS R10 | Some("2022:08:19 19:19:28").Some("66") | serial Some("022031004996") | img# None | lens Some("EF 50mm f/1.8 STM")
+rawler   thumbnail  -- none
+rawler   preview     147.1 ms  | 6000x4000 (decoded by rawler)
+rawler   full       -- none
+libraw   extract      1.4 ms  | 6000x4000 jpeg=true 1.62 MB, 3 thumbs in file | Canon EOS R10 | ts 1660936768 | serial "022031004996" | lens "EF50mm f/1.8 STM" | ISO 1600
+zune     decode     146.0 ms  | 6000x4000 full decode of LibRaw's JPEG
+
+## EOS_R5__Canon_EOS_R5_CRAW_ISO_100_nocrop_nodual.CR3  (16.8 MB)
+libraw   locate       0.9 ms  | 3 previews:
+             160x120       0.01 MB  @19824      jpeg=true  read     0.0 ms soi=true  zune-full     0.3 ms
+            1620x1080      0.29 MB  @100840     jpeg=true  read     0.0 ms soi=true  zune-full    10.8 ms
+               0x0         3.08 MB  @392704     jpeg=true  read     0.7 ms soi=true  zune-full   286.7 ms
+rawler   metadata     2.0 ms  | Canon EOS R5 | Some("2021:05:15 13:04:45").Some("24") | serial Some("083023000411") | img# None | lens Some("50mm f/1.4 DG HSM | A")
+rawler   thumbnail  -- none
+rawler   preview     274.8 ms  | 8192x5464 (decoded by rawler)
+rawler   full       -- none
+libraw   extract      1.8 ms  | 8192x5464 jpeg=true 3.08 MB, 3 thumbs in file | Canon EOS R5 | ts 1621083885 | serial "083023000411" | lens "50mm F1.4 DG HSM | Art 014" | ISO 100
+zune     decode     277.7 ms  | 8192x5464 full decode of LibRaw's JPEG
+
+## EOS_R5__Canon_EOS_R5_RAW_ISO_100_nocrop_nodual.CR3  (40.6 MB)
+libraw   locate       0.9 ms  | 3 previews:
+             160x120       0.01 MB  @19824      jpeg=true  read     0.0 ms soi=true  zune-full     0.3 ms
+            1620x1080      0.30 MB  @100936     jpeg=true  read     0.0 ms soi=true  zune-full    10.8 ms
+               0x0         3.11 MB  @401408     jpeg=true  read     0.7 ms soi=true  zune-full   283.7 ms
+rawler   metadata     4.6 ms  | Canon EOS R5 | Some("2021:05:15 13:02:02").Some("01") | serial Some("083023000411") | img# None | lens Some("50mm f/1.4 DG HSM | A")
+rawler   thumbnail  -- none
+rawler   preview     276.1 ms  | 8192x5464 (decoded by rawler)
+rawler   full       -- none
+libraw   extract      1.8 ms  | 8192x5464 jpeg=true 3.11 MB, 3 thumbs in file | Canon EOS R5 | ts 1621083722 | serial "083023000411" | lens "50mm F1.4 DG HSM | Art 014" | ISO 100
+zune     decode     278.5 ms  | 8192x5464 full decode of LibRaw's JPEG
+
+## EOS_R6__Canon_EOS_R6_RAW_ISO_100_nocrop_nodual.CR3  (22.9 MB)
+libraw   locate       0.9 ms  | 3 previews:
+             160x120       0.02 MB  @18288      jpeg=true  read     0.0 ms soi=true  zune-full     0.3 ms
+            1620x1080      0.46 MB  @102816     jpeg=true  read     0.0 ms soi=true  zune-full    13.6 ms
+               0x0         2.38 MB  @561152     jpeg=true  read     0.5 ms soi=true  zune-full   144.1 ms
+rawler   metadata     2.6 ms  | Canon EOS R6 | Some("2021:05:12 12:16:33").Some("06") | serial Some("093022004357") | img# None | lens Some("RF 70-200mm F2.8L IS USM")
+rawler   thumbnail  -- none
+rawler   preview     143.8 ms  | 5472x3648 (decoded by rawler)
+rawler   full       -- none
+libraw   extract      1.6 ms  | 5472x3648 jpeg=true 2.38 MB, 3 thumbs in file | Canon EOS R6 | ts 1620821793 | serial "093022004357" | lens "RF70-200mm F2.8 L IS USM" | ISO 100
+zune     decode     145.9 ms  | 5472x3648 full decode of LibRaw's JPEG
+
+## Z_6__DSC_0750.NEF  (47.5 MB)
+libraw   locate       0.7 ms  | 4 previews:
+             160x120       0.06 MB  @212736     jpeg=false
+            6048x4024      1.29 MB  @3280896    jpeg=true  read     0.2 ms soi=true  zune-full   136.7 ms  | scaled 3024x2012   111.6 ms  | scaled 756x503    64.3 ms
+            1620x1080      0.70 MB  @2578944    jpeg=true  read     0.1 ms soi=true  zune-full    17.9 ms
+             640x424       0.14 MB  @76196      jpeg=true  read     0.0 ms soi=true  zune-full     3.2 ms
+rawler   metadata     5.3 ms  | Nikon Z 6 | Some("2019:11:29 17:13:55").Some("99") | serial Some("6035906") | img# None | lens Some("Nikkor Z 24-70mm f/4 S")
+rawler   thumbnail  -- none
+rawler   preview     139.4 ms  | 6048x4024 (decoded by rawler)
+rawler   full       -- none
+libraw   extract      1.2 ms  | 6048x4024 jpeg=true 1.29 MB, 4 thumbs in file | Nikon Z 6 | ts 1575047635 | serial "6035906" | lens "NIKKOR Z 24-70mm f/4 S" | ISO 100
+zune     decode     137.1 ms  | 6048x4024 full decode of LibRaw's JPEG
+
+## Z_8__Nikon_Z8_high_efficiency_low.NEF  (24.4 MB)
+libraw   locate       0.8 ms  | 4 previews:
+             160x120       0.01 MB  @249156     jpeg=true  read     0.0 ms soi=true  zune-full     0.2 ms
+            8256x5504      5.88 MB  @1365504    jpeg=true  read     1.3 ms soi=true  zune-full   325.6 ms  | scaled 4128x2752   270.4 ms  | scaled 1032x688   171.9 ms
+            1620x1080      1.00 MB  @360448     jpeg=true  read     0.2 ms soi=true  zune-full    21.5 ms
+             640x424       0.15 MB  @100496     jpeg=true  read     0.0 ms soi=true  zune-full     3.3 ms
+rawler   metadata     2.8 ms  | Nikon Z 8 | Some("2023:06:02 18:53:25").Some("67") | serial Some("6004967") | img# None | lens Some("Nikkor Z 14-24mm f/2.8 S")
+rawler   thumbnail  -- none
+rawler   preview     322.5 ms  | 8256x5504 (decoded by rawler)
+rawler   full       -- none
+libraw   extract      2.5 ms  | 8256x5504 jpeg=true 5.88 MB, 4 thumbs in file | Nikon Z 8 | ts 1685732005 | serial "6004967" | lens "NIKKOR Z 14-24mm f/2.8 S" | ISO 64
+zune     decode     328.7 ms  | 8256x5504 full decode of LibRaw's JPEG
+
+## Z_8__Nikon_Z8_raw_14_bit_lossless_compression.NEF  (60.8 MB)
+libraw   locate       0.7 ms  | 4 previews:
+             160x120       0.01 MB  @244168     jpeg=true  read     0.0 ms soi=true  zune-full     0.2 ms
+            8256x5504      5.80 MB  @1331200    jpeg=true  read     1.3 ms soi=true  zune-full   322.3 ms  | scaled 4128x2752   268.2 ms  | scaled 1032x688   169.4 ms
+            1620x1080      0.98 MB  @355328     jpeg=true  read     0.1 ms soi=true  zune-full    21.1 ms
+             640x424       0.14 MB  @100556     jpeg=true  read     0.0 ms soi=true  zune-full     3.2 ms
+rawler   metadata     6.9 ms  | Nikon Z 8 | Some("2023:06:02 18:52:32").Some("17") | serial Some("6004967") | img# None | lens Some("Nikkor Z 14-24mm f/2.8 S")
+rawler   thumbnail  -- none
+rawler   preview     324.6 ms  | 8256x5504 (decoded by rawler)
+rawler   full       -- none
+libraw   extract      2.3 ms  | 8256x5504 jpeg=true 5.80 MB, 4 thumbs in file | Nikon Z 8 | ts 1685731952 | serial "6004967" | lens "NIKKOR Z 14-24mm f/2.8 S" | ISO 64
+zune     decode     323.1 ms  | 8256x5504 full decode of LibRaw's JPEG
+
+## libheif_example.heic  (0.7 MB)
+libheif  open         0.5 ms  | 1280x854, 1 embedded thumbnails
+libheif  decode   FAILED: Error while loading plugin: No decoding plugin installed for this compression format
+
+## Throughput A: largest preview, full decode, 48 jobs
+threads 1:     4.0 files/s  -> 1000-file card in  249.9 s
+threads 2:     7.5 files/s  -> 1000-file card in  133.2 s
+threads 4:     9.4 files/s  -> 1000-file card in  106.2 s
+
+## Throughput B: locate + read ~1620px preview + scaled decode to thumbnail, 48 jobs
+threads 1:    67.1 files/s  -> 1000-file card in   14.9 s
+threads 2:   126.4 files/s  -> 1000-file card in    7.9 s
+threads 4:   137.2 files/s  -> 1000-file card in    7.3 s

@@ -1,0 +1,14 @@
+[package]
+name = "preview-extract"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+jpeg-decoder = "0.3"
+libheif-rs = { version = "3", default-features = false, features = ["v1_21"] }
+rawler = "0.8"
+rayon = "1"
+zune-jpeg = "0.5.15"
+
+[build-dependencies]
+cc = "1"

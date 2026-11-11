@@ -105,13 +105,14 @@ request(photo, target_px) -> Result<Preview, PreviewError>
 
 #### Performance rules
 
-- The loupe shows the best result available immediately and swaps in a better one if it arrives later. In MVP that means thumbnail → 1620×1080 embedded preview (~15 ms) → full-resolution embedded JPEG (140–350 ms on a 2016 laptop for 24–45 MP). CR3 and NEF both carry all three, so this upgrade path is exercised from day one.
+- The loupe shows the best result available immediately and swaps in a better one if it arrives later. In MVP that means thumbnail → 1620×1080 embedded preview (~9 ms) → full-resolution embedded JPEG decoded at display size (½ or ¼ scale, 50–180 ms on a 2016 laptop) → full resolution only when zooming (140–330 ms for 24–45 MP). CR3 and NEF both carry all three, so this upgrade path is exercised from day one.
 - **Thumbnails** (~384 px long edge, ~20 KB): generated once at import/index from the 1620 px embedded preview — never the full-res one (7 s vs 106 s per 1,000 files in spike 01) — into an on-disk content-addressed cache. 250k photos ≈ 5 GB.
 - The import grid paints first from the smallest embedded preview (160×120 CR3 / 640×424 NEF, ~10–150 KB read per file), then upgrades.
 - **No large-preview cache for CR3/NEF.** The embedded JPEG is already on disk inside the RAW; caching it would double storage (~100 GB at 250k photos).
-- In loupe: decode full resolution for the current image and ±N neighbors ahead of time into an LRU of GPU textures; cancel stale work when the user jumps (via the job system, §3.4).
-- JPEG decode: `zune-jpeg` (or libjpeg-turbo via `turbojpeg`) with DCT downscaling for fit-to-screen; full decode only on zoom.
-- Metadata/preview extraction for CR3/NEF: **LibRaw** (`libraw_r`, thread-safe) behind a small C shim; it lists every embedded preview's offset and length in < 1 ms. LibRaw lacks subsecond capture time, so a small EXIF reader supplies `SubSecTimeOriginal` for the fingerprint. JPEG decode: `zune-jpeg` for now; compare libjpeg-turbo and Apple ImageIO on the Mac. HEIF via `libheif-rs`; on macOS, ImageIO is an acceptable fallback inside the HEIF provider.
+- In loupe: decode the current image and ±N neighbors at display size ahead of time (full resolution only for the current image, on zoom) into an LRU of GPU textures; cancel stale work when the user jumps (via the job system, §3.4).
+- JPEG decode: **libjpeg-turbo 3** via `turbojpeg` (vendored, SIMD), with DCT downscaling (½ / ¼) for fit-to-screen and thumbnails; full decode only on zoom ([spike 05](spikes/05-jpeg-decode.md)).
+- Metadata/preview extraction for CR3/NEF: **LibRaw** (`libraw_r`, thread-safe) behind a small C++ shim; one open lists every embedded preview's offset and length and, through LibRaw's EXIF callback, returns subsecond capture time, UTC offset and body serial in ~1 ms ([spike 03](spikes/03-metadata-fingerprint.md)). JPEG/HEIF metadata: `kamadak-exif`. JPEG decode: libjpeg-turbo; compare Apple ImageIO on the Mac. HEIF via `libheif-rs` (+ `libheif-plugin-libde265` on Linux); on macOS, ImageIO is likely the decoder inside the HEIF provider.
+- **HEIF is the exception to "no large-preview cache"** ([spike 04](spikes/04-heif-decode.md)): it has no large embedded JPEG, and a 12 MP software decode takes 0.8–1.6 s. Unless ImageIO's hardware decode is fast enough on the Mac, HEIF gets a Tier 2 render (~2560 px) cached at import.
 
 ### 3.3 XMP sidecars
 
@@ -151,7 +152,9 @@ All background work — card scanning, copying, hashing, thumbnails, loupe prefe
 
 ### 4.1 Card detection
 
-- macOS: watch `/Volumes` (FSEvents via `notify`) or DiskArbitration; a volume counts as a card if it contains `DCIM/`. Linux: same approach on `/media/$USER` and `/run/media/$USER`.
+- A volume counts as a card if it contains `DCIM/` (not the `removable` flag; built-in SD slots often report 0).
+- Linux: `poll()` `/proc/self/mountinfo` for `POLLPRI` and diff the mount table ([spike 06](spikes/06-card-detection.md)). Don't watch `/media/$USER` with inotify: udisks creates the mount-point directory before the filesystem is mounted.
+- macOS: DiskArbitration appeared/disappeared callbacks, which avoid the same race on `/Volumes`.
 - The card is **strictly read-only** to Mirrorless. Never delete, never format.
 
 ### 4.2 Import flow
@@ -168,7 +171,7 @@ Engine API takes a list of destinations so the post-MVP backup copy is a config 
 
 ### 4.3 Duplicate detection
 
-- **Fingerprint** = capture datetime incl. subseconds + camera body serial + file size (+ shutter count / image number where the format exposes it). Cheap: needs only header bytes.
+- **Fingerprint** = capture datetime incl. subseconds + camera body serial + file size. Cheap: needs only header bytes. No shutter count: Canon keeps it in CR3 timed metadata, and a collision only costs one confirming hash ([spike 03](spikes/03-metadata-fingerprint.md)). Store `OffsetTimeOriginal` alongside the capture time.
 - Fingerprint hit → hash the card file and compare to the stored BLAKE3 to confirm. Fingerprint miss → new.
 - Every library file has a stored hash (it's free during import, background-computed for adopted folders).
 
@@ -189,12 +192,14 @@ Each spike is throwaway code with a written yes/no outcome. Linux spikes run fir
 
 | Spike | Runs on | Question |
 |---|---|---|
-| ~~**Preview extraction**~~ ✅ | Linux | Done: LibRaw chosen; see [spike 01](spikes/01-preview-extraction.md). HEIC decode still to confirm (needs `libheif-plugin-libde265` on Linux, ImageIO on Mac). |
-| **JPEG decoder** | **Mac** | Full-res decode time: zune-jpeg vs libjpeg-turbo vs ImageIO on Apple Silicon. |
+| ~~**Preview extraction**~~ ✅ | Linux | Done: LibRaw chosen; see [spike 01](spikes/01-preview-extraction.md). |
+| ~~**Fingerprint metadata**~~ ✅ | Linux | Done: LibRaw EXIF callback for RAWs, kamadak-exif for JPEG/HEIF, no shutter count; see [spike 03](spikes/03-metadata-fingerprint.md). |
+| **HEIF decode** — Linux ✅ | Linux, **Mac** | Linux: works with libde265, but 0.8–1.6 s per 12 MP, no large embedded preview; see [spike 04](spikes/04-heif-decode.md). **Mac:** ImageIO hardware decode time on iPhone HEIC + camera `.HIF` (10-bit PQ); decides whether HEIF needs a Tier 2 cache. |
+| **JPEG decoder** — Linux ✅ | Linux, **Mac** | Linux: libjpeg-turbo ~27 % faster than zune-jpeg, ½-scale decode halves fit-to-screen cost; see [spike 05](spikes/05-jpeg-decode.md). **Mac:** same binary + ImageIO column on Apple Silicon. |
 | **gpui image grid** — Linux ✅ | Linux (function), **Mac (performance)** | Linux done: textures from pixel buffers, eviction, bounded memory and keyboard all work; see [spike 02](spikes/02-gpui-grid.md). **Mac:** 60/120 fps scroll, Retina texture size, unified-memory use. |
 | **Card read throughput** | **Mac**, real card + reader | 1 vs 2 vs 4 parallel readers, to set the default I/O concurrency (§3.4). |
 | **Affinity behaviour** | **Mac** | Where does Affinity's save dialog default to after `open -a` on a RAW? What name does it suggest? Does Quick Look thumbnail `.afphoto`? *Decides how reliable auto-stacking can be.* |
-| **Card detection** | **Mac**, real SD reader | `/Volumes` + `DCIM/` detection and mount/unmount events. |
+| **Card detection** — Linux watcher built | Linux (manual run), **Mac**, real SD reader | Linux: `mountinfo` watcher + loop-image test written; needs one run from the desktop session; see [spike 06](spikes/06-card-detection.md). **Mac:** DiskArbitration + `DCIM/`, mount/unmount and surprise-removal events. |
 
 A macOS CI runner confirms the code builds and tests pass, but can't answer the hardware, Affinity, or smoothness questions.
 
@@ -290,6 +295,7 @@ Runtime: ONNX Runtime via the `ort` crate, using the CoreML backend on macOS (Ap
 |---|---|---|
 | gpui is pre-1.0, sparsely documented, API churns with Zed | High | Pin a Zed rev; isolate all UI in `mm-app`; Phase 0 grid spike before committing. |
 | Affinity saves edits somewhere unpredictable → stacking fails | Medium | Phase 0 spike; stem-matching watcher; manual attach fallback. |
+| HEIF has no fast preview path (software HEVC decode ~1 s per 12 MP) | Certain on Linux; unknown on Mac | Placeholder tiles filled from the job queue; Tier 2 render cache for HEIF unless ImageIO is fast enough ([spike 04](spikes/04-heif-decode.md)). |
 | Other makers (Sony, Fuji, …) embed small previews | Certain | Not built in MVP; `RawProvider` seam + typed `PreviewError` shown in the UI (§3.2) so support is additive later. |
 | Concurrency bugs in the job system (races, deadlocks, starvation) | Medium | Single catalog writer; message passing instead of shared locks; headless stress tests that cancel and reprioritize randomly. |
 | AI models are slow on large libraries or licensed for non-commercial use only | Medium | Background queue with visible-first priority; CoreML backend; vet model licenses before adopting. |

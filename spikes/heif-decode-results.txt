@@ -1,0 +1,15 @@
+libheif [1, 21, 2]; decoders: ["libde265"]
+Median of 5 runs; warm page cache; output RGBA 8-bit.
+
+## libheif_example.heic  (0.7 MB)
+open            0.5 ms  | 1280x854 luma 8 bit, 1 thumbnail(s), 2 top-level images
+thumbnail       9.2 ms  | Ok((320, 212))
+primary       129.5 ms  | 1 tile thread(s) -> Ok((1280, 854))
+primary       129.6 ms  | 2 tile thread(s) -> Ok((1280, 854))
+primary       129.6 ms  | 4 tile thread(s) -> Ok((1280, 854))
+
+## exif.heic  (4.9 MB)
+open            2.8 ms  | 3024x4032 luma 8 bit, 0 thumbnail(s), 1 top-level images
+primary      1614.0 ms  | 1 tile thread(s) -> Ok((3024, 4032))
+primary       913.3 ms  | 2 tile thread(s) -> Ok((3024, 4032))
+primary       771.2 ms  | 4 tile thread(s) -> Ok((3024, 4032))

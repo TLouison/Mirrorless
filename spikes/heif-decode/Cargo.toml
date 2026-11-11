@@ -1,0 +1,7 @@
+[package]
+name = "heif-decode"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+libheif-rs = { version = "3", default-features = false, features = ["v1_21"] }

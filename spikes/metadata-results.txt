@@ -1,0 +1,61 @@
+Median of 7 runs; warm page cache. 'read' = bytes requested from the kernel per file.
+
+## EOS_R10__IMG_4276.CR3  (31.0 MB)
+  libraw     1.01 ms    568 KB read | Canon EOS R10 | 2022:08:19 19:19:28.66 -05:00 | serial "022031004996" (exif "022031004996") | shot_order 0 | 3 previews
+  nom-exif   0.06 ms     30 KB read | Canon EOS R10 | 2022-08-19 19:19:28.66 -05:00 | serial 022031004996
+  kamadak    0.01 ms      8 KB read | FAILED: Unknown image format
+
+## EOS_R5__Canon_EOS_R5_CRAW_ISO_100_nocrop_nodual.CR3  (16.8 MB)
+  libraw     0.96 ms    505 KB read | Canon EOS R5 | 2021:05:15 13:04:45.24 +01:00 | serial "083023000411" (exif "083023000411") | shot_order 0 | 3 previews
+  nom-exif   0.06 ms     34 KB read | Canon EOS R5 | 2021-05-15 13:04:45.24 +01:00 | serial 083023000411
+  kamadak    0.01 ms      8 KB read | FAILED: Unknown image format
+
+## EOS_R5__Canon_EOS_R5_RAW_ISO_100_nocrop_nodual.CR3  (40.6 MB)
+  libraw     0.95 ms    500 KB read | Canon EOS R5 | 2021:05:15 13:02:02.01 +01:00 | serial "083023000411" (exif "083023000411") | shot_order 0 | 3 previews
+  nom-exif   0.06 ms     35 KB read | Canon EOS R5 | 2021-05-15 13:02:02.01 +01:00 | serial 083023000411
+  kamadak    0.01 ms      8 KB read | FAILED: Unknown image format
+
+## EOS_R6__Canon_EOS_R6_RAW_ISO_100_nocrop_nodual.CR3  (22.9 MB)
+  libraw     0.91 ms    465 KB read | Canon EOS R6 | 2021:05:12 12:16:33.06 +02:00 | serial "093022004357" (exif "093022004357") | shot_order 0 | 3 previews
+  nom-exif   0.06 ms     36 KB read | Canon EOS R6 | 2021-05-12 12:16:33.06 +02:00 | serial 093022004357
+  kamadak    0.01 ms      8 KB read | FAILED: Unknown image format
+
+## D850__Nikon-D850-14bit-lossless-compressed.NEF  (55.2 MB)
+  libraw     0.69 ms    271 KB read | Nikon D850 | 2017:10:15 17:34:59.09 +01:00 | serial "6003734" (exif "") | shot_order 0 | 4 previews
+  nom-exif   0.01 ms      8 KB read | FAILED: malformed ifd entry: parse ifd entry header failed: Incomplete(Size(4508))
+  kamadak   29.68 ms   52.6 MB read | "NIKON D850" | 2017-10-15 17:34:59."09" "+01:00" | serial -
+
+## Z_6__DSC_0750.NEF  (47.5 MB)
+  libraw     0.89 ms    353 KB read | Nikon Z 6 | 2019:11:29 17:13:55.99 +01:00 | serial "6035906" (exif "6035906") | shot_order 0 | 4 previews
+  nom-exif   0.01 ms      8 KB read | FAILED: malformed ifd entry: parse ifd entry header failed: Incomplete(Size(4520))
+  kamadak   26.40 ms   45.3 MB read | "NIKON Z 6" | 2019-11-29 17:13:55."99" "+01:00" | serial "6035906"
+
+## Z_8__Nikon_Z8_high_efficiency_low.NEF  (24.4 MB)
+  libraw     0.87 ms    333 KB read | Nikon Z 8 | 2023:06:02 18:53:25.67 +02:00 | serial "6004967" (exif "6004967") | shot_order 0 | 4 previews
+  nom-exif   0.01 ms      8 KB read | FAILED: malformed ifd entry: parse ifd entry header failed: Incomplete(Size(24924))
+  kamadak   12.80 ms   23.3 MB read | "NIKON Z 8" | 2023-06-02 18:53:25."67" "+02:00" | serial "6004967"
+
+## Z_8__Nikon_Z8_raw_14_bit_lossless_compression.NEF  (60.8 MB)
+  libraw     0.87 ms    337 KB read | Nikon Z 8 | 2023:06:02 18:52:32.17 +02:00 | serial "6004967" (exif "6004967") | shot_order 0 | 4 previews
+  nom-exif   0.01 ms      8 KB read | FAILED: malformed ifd entry: parse ifd entry header failed: Incomplete(Size(24924))
+  kamadak   32.70 ms   58.0 MB read | "NIKON Z 8" | 2023-06-02 18:52:32."17" "+02:00" | serial "6004967"
+
+## libheif_example.heic  (0.7 MB)
+  nom-exif   0.02 ms      8 KB read | FAILED: malformed iso-bmff box: no exif offset in meta box
+  kamadak    0.01 ms     16 KB read | FAILED: No Exif data found in HEIF
+
+## Canon_40D.jpg  (0.0 MB)
+  nom-exif   0.05 ms      8 KB read | Canon EOS 40D | 2008-05-30 15:56:01.00 - | serial -
+  kamadak    0.01 ms      8 KB read | "Canon EOS 40D" | 2008-05-30 15:56:01."00" - | serial -
+
+## Nikon_D70.jpg  (0.0 MB)
+  nom-exif   0.11 ms     14 KB read | NIKON D70 | 2008-03-15 09:52:01.- - | serial -
+  kamadak    0.01 ms      8 KB read | "NIKON D70" | 2008-03-15 09:52:01.- - | serial -
+
+## exif.heic  (4.9 MB)
+  nom-exif   0.09 ms      8 KB read | iPhone 12 Pro | 2022-07-22T21:26:32+08:00.092 +08:00 | serial -
+  kamadak    0.02 ms     24 KB read | "iPhone 12 Pro" | 2022-07-22 21:26:32."092" "+08:00" | serial -
+
+## exif.jpg  (3.9 MB)
+  nom-exif   0.15 ms    280 KB read | vivo X90 Pro+ | 2023-07-09T20:36:33+08:00.616 +08:00 | serial -
+  kamadak    0.01 ms     17 KB read | "vivo X90 Pro+" | 2023-07-09 20:36:33."616" "+08:00" | serial -

@@ -62,7 +62,7 @@ libheif opened the file in 0.5 ms (1280×854, one embedded thumbnail), but **dec
 ## Decisions and roadmap changes
 
 1. **LibRaw backs the CR3/NEF providers.** Use `libraw_r` behind a small C shim so Rust never depends on LibRaw's struct layouts. It's LGPL-2.1/CDDL; dynamic linking is fine for a personal tool and keeps a future commercial option open.
-2. **Duplicate-check fingerprint needs subsecond capture time,** which LibRaw doesn't provide. In Phase 1, read `SubSecTimeOriginal` (and the shutter count where the maker notes have it) with a small EXIF reader. This is cheap, since the EXIF block is in the first few KB.
+2. **Duplicate-check fingerprint needs subsecond capture time,** which LibRaw doesn't provide. In Phase 1, read `SubSecTimeOriginal` (and the shutter count where the maker notes have it) with a small EXIF reader. This is cheap, since the EXIF block is in the first few KB. *Superseded by [spike 03](03-metadata-fingerprint.md): LibRaw's EXIF callback provides subseconds, and shutter count is dropped.*
 3. **Progressive preview upgrade is needed for CR3/NEF too, not just future formats.** The loupe shows the 1620×1080 preview first (~15 ms), then swaps in full resolution (140–350 ms here). Full res is prefetched for the neighbours in the job system so it's usually ready before you arrive.
 4. **Restate the speed bar:** *first pixels in < 50 ms; full resolution ready before the next keypress during normal culling pace.*
 5. **Import grid fills from the smallest previews first** (160×120 / 640×424, ~10–150 KB each), then upgrades. That keeps card reads tiny, which matters more than CPU once the card is the bottleneck.

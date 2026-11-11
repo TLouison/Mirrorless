@@ -1,0 +1,10 @@
+[package]
+name = "jpeg-decode"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Built from vendored source with SIMD (needs cmake + nasm), so this is libjpeg-turbo 3.x.
+turbojpeg = { version = "1.5", default-features = false, features = ["cmake", "require-simd"] }
+zune-jpeg = "0.5.15"
+zune-core = "0.5"
